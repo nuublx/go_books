@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/nuublx/go_books/database"
 )
 
 type Book struct {
@@ -36,6 +37,8 @@ func getBooks(c *gin.Context) {
 }
 
 func main() {
+	dbClient := database.GetDatabase()
+	dbClient.Ping()
 	router := gin.Default()
 	router.GET("/books", getBooks)
 	router.Run("localhost:8080")
